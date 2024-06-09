@@ -13,8 +13,8 @@ const nextConfig = {
     },
     publicRuntimeConfig: {
         apiUrl: process.env.NODE_ENV === 'development'
-            ? 'http://qhse.usmart-iot.com/api' // development api
-            : 'http://qhse.usmart-iot.com/api' // production api
+            ? 'http://localhost/api' // development api
+            : 'http://localhost/api' // production api
     }
   }
   module.exports = nextConfig
