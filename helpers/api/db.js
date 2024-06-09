@@ -24,10 +24,10 @@ async function initialize() {
    // await connection.query(`CREATE DATABASE IF NOT EXISTS \`${database}\`;`);
 
     // connect to db
-    const sequelize = new Sequelize("usmartco_test", "usmartco_test", "cEhTLAJEZ3g4X7HwLDkA", {
-        host: "66.23.226.51",
+    const sequelize = new Sequelize(user,database, password, {
+        host: host,
         dialect: "mysql",
-        port: "3306",
+        port: port,
         connectionLimit: 10,
         socketPath: "/Applications/MAMP/tmp/mysql/mysql.sock"
       });
