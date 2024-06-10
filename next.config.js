@@ -9,7 +9,7 @@ const nextConfig = {
             port:'3306',
         multipleStatements: true
         },
-        secret: 'THIS IS USED TO SIGN AND VERIFY JWT TOKENS, REPLACE IT WITH YOUR OWN SECRET, IT CAN BE ANY STRING'
+        secret: '12345678'
     },
     publicRuntimeConfig: {
         apiUrl: process.env.NODE_ENV === 'development'

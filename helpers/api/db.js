@@ -14,11 +14,11 @@ async function initialize() {
     // create db if it doesn't already exist
     const { host, port, user, password, database } = serverRuntimeConfig.dbConfig;
     const connection = await mysql.createConnection({  
-    host : host,
-    user:user,
-    password:password,
-    database:database,
-    port:port,
+        host : '66.23.226.51',
+        user:'usmartco_test',
+        password:'cEhTLAJEZ3g4X7HwLDkA',
+        database:'usmartco_test',
+        port:'3306',
     multipleStatements: true,
     ssl:{rejectUnauthorized:false}
 
@@ -27,10 +27,10 @@ async function initialize() {
    await connection.query(`CREATE DATABASE IF NOT EXISTS \`${database}\`;`);
 
     // connect to db
-    const sequelize = new Sequelize(user,database, password, {
-        host: host,
+    const sequelize = new Sequelize('usmartco_test','usmartco_test', 'cEhTLAJEZ3g4X7HwLDkA', {
+        host: '66.23.226.51',
         dialect: "mysql",
-        port: port,
+        port: '3306',
         connectionLimit: 10,
         socketPath: "/Applications/MAMP/tmp/mysql/mysql.sock"
       });
