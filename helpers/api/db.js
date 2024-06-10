@@ -19,9 +19,12 @@ async function initialize() {
     password:'cEhTLAJEZ3g4X7HwLDkA',
     database:'usmartco_test',
     port:'3306',
-    multipleStatements: true
+    multipleStatements: true,
+    ssl:{rejectUnauthorized:false}
+
+
 });
-   // await connection.query(`CREATE DATABASE IF NOT EXISTS \`${database}\`;`);
+   await connection.query(`CREATE DATABASE IF NOT EXISTS \`${database}\`;`);
 
     // connect to db
     const sequelize = new Sequelize(user,database, password, {
@@ -40,7 +43,6 @@ async function initialize() {
     db.initialized = true;
 }
 
-// sequelize models with schema definitions
 
 function userModel(sequelize) {
     const attributes = {
