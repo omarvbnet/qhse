@@ -14,11 +14,11 @@ async function initialize() {
     // create db if it doesn't already exist
     const { host, port, user, password, database } = serverRuntimeConfig.dbConfig;
     const connection = await mysql.createConnection({  
-    host : '66.23.226.51',
-    user:'usmartco_test',
-    password:'cEhTLAJEZ3g4X7HwLDkA',
-    database:'usmartco_test',
-    port:'3306',
+    host : host,
+    user:user,
+    password:password,
+    database:database,
+    port:port,
     multipleStatements: true,
     ssl:{rejectUnauthorized:false}
 
