@@ -22,7 +22,6 @@ async function initialize() {
         dialect: "mysql",
         port: '3306',
         connectionLimit: 10,
-        socketPath: "/Applications/MAMP/tmp/mysql/mysql.sock"
     });
 
     // init models and add them to the exported db object

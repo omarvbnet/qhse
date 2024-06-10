@@ -5,8 +5,8 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 
 import { Layout } from 'components/account';
-import { userService, alertService } from 'services';
-
+import { userService } from 'services';
+import { alertService } from 'services';
 export default Login;
 
 function Login() {
@@ -24,14 +24,14 @@ function Login() {
     const { errors } = formState;
 
     function onSubmit({ username, password }) {
-        alertService.clear();
+      //  alertService.clear();
         return userService.login(username, password)
-            .then(() => {
+            .then((v) => {
                 // get return url from query parameters or default to '/'
                 const returnUrl = router.query.returnUrl || '/';
+                console.log("000000", returnUrl)
                 router.push(returnUrl);
-            })
-            .catch(alertService.error);
+            }).catch(alertService.error);
     }
 
     return (
