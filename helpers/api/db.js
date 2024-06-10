@@ -19,7 +19,6 @@ async function initialize() {
         password:'cEhTLAJEZ3g4X7HwLDkA',
         database:'usmartco_test',
         port:'3306',
-    multipleStatements: true,
     ssl:{rejectUnauthorized:false}
 
 
