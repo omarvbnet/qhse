@@ -3,15 +3,18 @@ import { useState, useEffect } from 'react';
 import { NavLink } from '.';
 import { userService } from 'services';
 import axios from 'axios';
+import getConfig from 'next/config';
+
 import { ExportToExcel } from 'components/ExportToExcel';
 export { Nav };
+const { publicRuntimeConfig } = getConfig();
 
 function Nav() {
     const [user, setUser] = useState(null);
     const [data, setData] = useState([])
     const fileName = "QHSE_TEAM_ACTIVITIES";
     useEffect(() => {
-        axios.get('http://localhost:3000/api/getData').then(postData => {
+        axios.get(`${publicRuntimeConfig.apiUrl}/getData`).then(postData => {
             const customHeadings = postData.data.map(item=>({
                 "ID": item.id,
                 "Inspector Name":item.username,

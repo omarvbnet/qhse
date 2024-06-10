@@ -1,16 +1,14 @@
 import * as React from 'react';
-import { DataGrid } from '@mui/x-data-grid';
 import Box from '@mui/material/Box';
-
-import XLSX from "xlsx";
-import {ExportToExcel} from '../components/ExportToExcel'
 import axios from 'axios'
 import AddDmsg from './dailog';
 import MUIDataTable from 'mui-datatables';
-
 import Link from 'next/link';
 import { userService } from 'services';
 export default Home;
+import getConfig from 'next/config';
+
+const { publicRuntimeConfig } = getConfig();
 
 function Home() {
     return (
@@ -106,7 +104,7 @@ let rows = [
 
   React.useEffect(() => {
     const fetchData = () =>{
-     axios.get('http://localhost:3000/api/getData').then(postData => {
+     axios.get(`${publicRuntimeConfig.apiUrl}/getData`).then(postData => {
 
      // reshaping the array
      const customHeadings = postData.data.map(item=>({
@@ -123,7 +121,7 @@ let rows = [
 
       setData(customHeadings) 
      });
-     axios.get('http://localhost:3000/api/getData').then(postData => {
+     axios.get(`${publicRuntimeConfig.apiUrl}/getData`).then(postData => {
      rows = postData.data
      // reshaping the array
     console.log(postData.data)

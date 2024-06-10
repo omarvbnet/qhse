@@ -18,6 +18,10 @@ import Alert from '@mui/material/Alert';
 import { useRouter } from "next/navigation";
 import { styled } from '@mui/material/styles';
 import axios from 'axios';
+import getConfig from 'next/config';
+
+const { publicRuntimeConfig } = getConfig();
+
 const options = [
   {'type':'FDT Handover',
 'isPressed':false
@@ -161,7 +165,7 @@ async function handleOk() {
   for(let i = 0; i < visitCount.length; i += 1) {
     if(visitCount[i].province !== '' && visitCount[i].siteID !=='' && visitCount[i].visitType !=='' ){
       setIsValid(true)
-      axios.post('http://localhost:3000/api/addData', {
+      axios.post(`${publicRuntimeConfig.apiUrl}/addData`, {
         province: visitCount[i].province,
         username: userInfo.firstName + " " + userInfo.lastName,
         date: currentDate,
