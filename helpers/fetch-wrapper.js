@@ -46,16 +46,13 @@ async function handleResponse(response) {
     // check for error response
     if (!response.ok) {
         if ([401, 403].includes(response.status) && userService.userValue) {
-            console.log('loqouttttttt',response.status)
             // auto logout if 401 Unauthorized or 403 Forbidden response returned from api
             userService.logout();
         }
 
         // get error message from body or default to response status
         const error = (data && data.message) || response.statusText;
-        return Promise.reject(error).catch(e => {
-            console.log('vvve,e',e);
-        });
+        return Promise.reject(error);
     }
 
     return data;

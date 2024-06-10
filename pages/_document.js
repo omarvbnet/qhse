@@ -15,12 +15,12 @@ function Document() {
                 <NextScript />
 
                 {/* credits */}
-                <div className="text-center mt-1">
+                <div className="text-center mt-4">
                     <p>
-                        <a href="#" target="_blank">Made by Oshakir@2024</a>
+                        <a href="https://jasonwatmore.com/next-js-13-mysql-user-registration-and-login-tutorial-with-example-app" target="_blank">Next.js 13 + MySQL - User Registration and Login Tutorial with Example App</a>
                     </p>
                     <p>
-                        
+                        <a href="https://jasonwatmore.com" target="_blank">JasonWatmore.com</a>
                     </p>
                 </div>
             </body>

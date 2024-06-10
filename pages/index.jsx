@@ -2,8 +2,6 @@ import * as React from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import Box from '@mui/material/Box';
 
-import XLSX from "xlsx";
-import {ExportToExcel} from '../components/ExportToExcel'
 import axios from 'axios'
 import AddDmsg from './dailog';
 import MUIDataTable from 'mui-datatables';

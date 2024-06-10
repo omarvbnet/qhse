@@ -1,5 +1,5 @@
 import getConfig from 'next/config';
-import mysql from 'mysql';
+import mysql from 'mysql2/promise';
 import { Sequelize, DataTypes } from 'sequelize';
 
 const { serverRuntimeConfig } = getConfig();
@@ -13,26 +13,18 @@ export const db = {
 async function initialize() {
     // create db if it doesn't already exist
     const { host, port, user, password, database } = serverRuntimeConfig.dbConfig;
-    const connection = await mysql.createConnection({  
-        host : '66.23.226.51',
-        user:'usmartco_test',
-        password:'cEhTLAJEZ3g4X7HwLDkA',
-        database:'usmartco_test',
-        port:'3306',
-    ssl:{rejectUnauthorized:false}
-
-
-});
-   await connection.query(`CREATE DATABASE IF NOT EXISTS \`${database}\`;`);
+    const connection = await mysql.createConnection({ host, port, user, password });
+    await connection.query(`CREATE DATABASE IF NOT EXISTS \`${database}\`;`);
 
     // connect to db
-    const sequelize = new Sequelize('usmartco_test','usmartco_test', 'cEhTLAJEZ3g4X7HwLDkA', {
+    const sequelize = new Sequelize(database, user, password, {
         host: '66.23.226.51',
         dialect: "mysql",
         port: '3306',
         connectionLimit: 10,
         socketPath: "/Applications/MAMP/tmp/mysql/mysql.sock"
-      });
+    });
+
     // init models and add them to the exported db object
     db.User = userModel(sequelize);
 
@@ -42,6 +34,7 @@ async function initialize() {
     db.initialized = true;
 }
 
+// sequelize models with schema definitions
 
 function userModel(sequelize) {
     const attributes = {
