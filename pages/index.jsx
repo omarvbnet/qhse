@@ -105,25 +105,7 @@ let rows = [
   React.useEffect(() => {
     const fetchData = () =>{
      axios.get(`${publicRuntimeConfig.apiUrl}/getData`).then(postData => {
-
-     // reshaping the array
-     const customHeadings = postData.data.map(item=>({
-       "ID": item.id,
-       "Inspector Name":item.username,
-       "site_id":item.site_id,
-       "inspection_type":item.inspection_type,
-       'Visit Date':item.visit_date,
-       "Province": item.province,
-       "added_date":item.added_date,
-       "location":item.location,
-      
-     }))
-
-      setData(customHeadings) 
-     });
-     axios.get(`${publicRuntimeConfig.apiUrl}/getData`).then(postData => {
-     rows = postData.data
-     // reshaping the array
+setData(postData.data)     // reshaping the array
     console.log(postData.data)
      })
     }
@@ -163,7 +145,7 @@ let rows = [
      }}>
      <MUIDataTable
      title={'Daily Log'}
-        data={rows}
+        data={data}
         columns={columns}
        options={options}
       sx={{

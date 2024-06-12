@@ -10,10 +10,22 @@ var mysqlConnection = mysql.createConnection({
     multipleStatements: true
 });
 mysqlConnection.connect((err) => {
-    if (!err)
-        console.log('DB connection succeded.');
-    else
+    if (!err){
+  
+       //  mysqlConnection.destroy()
+        }
+          
+    else{
         console.log('DB connection failed \n Error : ' + JSON.stringify(err, undefined, 2));
+    
+        mysqlConnection.end((err) => {
+            if (err) return console.error(err.message);
+          
+            console.log('Close the database connection.');
+          });
+         // mysqlConnection.destroy()
+    }
 });
+
 module.exports = mysqlConnection;
 

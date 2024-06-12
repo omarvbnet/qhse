@@ -20,7 +20,7 @@ function Document() {
                         <a href="#" target="_blank">QHSE Activites App</a>
                     </p>
                     <p>
-                        <a href="https://jasonwatmore.com" target="_blank">Made By Omar AL-jubouri @2024</a>
+                        <a href="#" target="_blank">Made By Omar AL-jubouri @2024</a>
                     </p>
                 </div>
             </body>

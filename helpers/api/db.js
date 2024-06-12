@@ -21,7 +21,7 @@ async function initialize() {
         host: '66.23.226.51',
         dialect: "mysql",
         port: '3306',
-        connectionLimit: 10,
+        connectionLimit: 100,
     });
 
     // init models and add them to the exported db object

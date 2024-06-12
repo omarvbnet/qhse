@@ -19,8 +19,12 @@ import { useRouter } from "next/navigation";
 import { styled } from '@mui/material/styles';
 import axios from 'axios';
 import getConfig from 'next/config';
-
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 const { publicRuntimeConfig } = getConfig();
+import dayjs from 'dayjs';
+import e from 'cors';
 
 const options = [
   {'type':'FDT Handover',
@@ -105,12 +109,13 @@ const StyledSpeedDial = styled(SpeedDial)(({ theme }) => ({
 function ConfirmationDialogRaw(props) {
    
   const { onClose, value: valueProp, open, ...other } = props;
-  const [value, setValue] = React.useState('');
   const radioGroupRef = React.useRef(null);
   const [isUploaded, setIsUploaded] = React.useState(null);
   const [isValid, setIsValid,] = React.useState(null);
   let [visitCount, seVisitCount] = React.useState([]);
   const [province, setProvince] = React.useState([]);
+  const [visitDate, setvisitDate] = React.useState([]);
+
   const [visitType, setVisitType] = React.useState([]);
   const router = useRouter();
   const handleEntering = () => {
@@ -131,6 +136,7 @@ function ConfirmationDialogRaw(props) {
       siteID:'',
       province:'',
       visitType:'',
+      date:''
     
     }
     visitCount.filter(function (element) {
@@ -151,6 +157,7 @@ function ConfirmationDialogRaw(props) {
       
      setProvince([])
      setVisitType([])
+     setvisitDate([])
      // setinspectionArray(inspectionArray.filter((ele) => ele !== e.target.value));
       seVisitCount(visitCount.filter((ele) => ele !==undefined && ele.type !== mapData.type));
  
@@ -164,11 +171,14 @@ async function handleOk() {
   const currentDate = new Date().toUTCString();
   for(let i = 0; i < visitCount.length; i += 1) {
     if(visitCount[i].province !== '' && visitCount[i].siteID !=='' && visitCount[i].visitType !=='' ){
+      if(visitCount[i].date == ''){
+        visitCount[i].date = dayjs(Date.now()).toString()
+      }
       setIsValid(true)
       axios.post(`${publicRuntimeConfig.apiUrl}/addData`, {
         province: visitCount[i].province,
         username: userInfo.firstName + " " + userInfo.lastName,
-        date: currentDate,
+        date: visitCount[i].date,
         creationDate: currentDate,
         siteID: visitCount[i].siteID,
         visitType: visitCount[i].visitType,
@@ -206,7 +216,7 @@ const handleVisits = (e, data)=>{
     province: data.province,
     visitType:data.visitType,
     creationDate:Date.now().toString(),
-    date:Date.now().toString(),
+    date:'',
   }
   visitCount.filter(function (element) {
 
@@ -224,13 +234,25 @@ const handleProvince = (event, i) => {
   province[i] =  event.target.value;
   visitCount[i].province =  event.target.value;
 };
+const  useFormik =({
+  initialValues: {
+      departureTime: Date.now(),
+  },
+  onSubmit: values => {
+      alert(JSON.stringify(values, null, 2));
+  },
+});
+const handleVisitDate = (event, i) => {
+ console.log('fffff',event.toString())
+ visitCount[i].date = event.toString()
+};
 const handleVisitType = (event,i) => {
   visitType[i] =  event.target.value
   visitCount[i].visitType =  event.target.value;
 };
   return (
     <Dialog
-      sx={{ '& .MuiDialog-paper': { width: '80%', maxHeight: 435 } }}
+      sx={{ '& .MuiDialog-paper': { width: '80%', maxHeight:535 } }}
       maxWidth="xs"
       TransitionProps={{ onEntering: handleEntering }}
       open={open}
@@ -273,11 +295,22 @@ const handleVisitType = (event,i) => {
               display: 'grid',
               paddingLeft:'20px',
               width: '50%',
-              height:'160px',
+              height:'280px',
               justifyContent: 'space-between',
           
              }}>
              <p key={i}>{i+1}</p>
+             <LocalizationProvider dateAdapter={AdapterDayjs}>
+     
+     <DatePicker
+       label={'Visit Date'}
+       value={dayjs(Date.now())}
+       onChange={(date,value) => {
+        handleVisitDate(dayjs(date),i);
+        }}
+     />
+ 
+ </LocalizationProvider>
            <input   
            onChange={(e)=>handleSiteIdTextBox(e,i)}
            style={{
@@ -290,7 +323,7 @@ const handleVisitType = (event,i) => {
         labelId="demo-select-small-label"
         id="demo-select-small"
         value={province[i]}
-        label="Province"
+        label={'Province'}
         onChange={(e)=>handleProvince(e,i)}
        
       >
