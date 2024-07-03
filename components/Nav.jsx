@@ -17,7 +17,7 @@ function Nav() {
         axios.get(`${publicRuntimeConfig.apiUrl}/getData`).then(postData => {
             const customHeadings = postData.data.map(item=>({
                 "ID": item.id,
-                "Inspector Name":item.username,
+                "Inspector Name":item.Inspector_Name,
                 "site_id":item.site_id,
                 "inspection_type":item.inspection_type,
                 'Visit Date':item.visit_date,

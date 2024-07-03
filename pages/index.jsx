@@ -30,8 +30,8 @@ let columns = [
   }
  },
  { 
-  name: 'Inspector Name', 
-  lable: 'Inspector Name',
+  name: 'Inspector_Name', 
+  lable: 'Inspector_Name',
   options: {
   filtter:true,
   sort:true,
@@ -89,11 +89,6 @@ let columns = [
  },
   
   
-];
-
-
-
-let rows = [
 ];
 
  function DataTable() {
