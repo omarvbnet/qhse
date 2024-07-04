@@ -61,7 +61,6 @@ const typeOption = [
 ]
 const visitsOptions = [
   'Request',
-  'Clearance',
   'Random',
   'Support',
   'NCR Check',
@@ -73,6 +72,12 @@ const visitsOptions = [
   'Vacation',
   'Back Office',
   'Way'
+];
+const requestStatus = [
+  'Pending',
+  'Clearance',
+  'Compeleted',
+  
 ];
 const provincese = [
   'Bahgdad',
@@ -116,7 +121,7 @@ function ConfirmationDialogRaw(props) {
   let [visitCount, seVisitCount] = React.useState([]);
   const [province, setProvince] = React.useState([]);
   const [visitDate, setvisitDate] = React.useState([]);
-
+  const [requestStatusV, setrequestStatus] = React.useState([]);
   const [visitType, setVisitType] = React.useState([]);
   const router = useRouter();
   const handleEntering = () => {
@@ -185,6 +190,7 @@ async function handleOk() {
         visitType: visitCount[i].visitType,
         type: visitCount[i].type,
         province: visitCount[i].province,
+        requestStatus:visitCount[i].requestStatus
       }).then (function (response) {
        setIsUploaded(response.data);
        console.log(isUploaded)
@@ -218,6 +224,7 @@ const handleVisits = (e, data)=>{
     visitType:data.visitType,
     creationDate:Date.now().toString(),
     date:'',
+    requestStatus:''
   }
   visitCount.filter(function (element) {
 
@@ -250,6 +257,10 @@ const handleVisitDate = (event, i) => {
 const handleVisitType = (event,i) => {
   visitType[i] =  event.target.value
   visitCount[i].visitType =  event.target.value;
+};
+const handlerequestStatus = (event,i) => {
+  requestStatusV[i] =  event.target.value
+  visitCount[i].requestStatus =  event.target.value;
 };
   return (
     <Dialog
@@ -348,6 +359,23 @@ const handleVisitType = (event,i) => {
       >
       {visitsOptions.map((visit, ip)=>
        <MenuItem key={i*200} value={visit}>{visit}</MenuItem>
+      )}
+      </Select>
+      <Select
+        labelId="demo-select-small-label"
+        id="demo-select-small"
+        value={requestStatusV[i]}
+        key={requestStatusV.length++}
+        label="Visit Type"
+        style={{
+          height:'30px',
+          padding:'5px'
+         
+        }}
+        onChange={(e)=> handlerequestStatus(e,i)}
+      >
+      {requestStatus.map((type, ip)=>
+       <MenuItem key={i*230} value={type}>{type}</MenuItem>
       )}
       </Select>
     

@@ -21,6 +21,7 @@ function Nav() {
                 "site_id":item.site_id,
                 "inspection_type":item.inspection_type,
                 'Visit Date':item.visit_date,
+                "Request_Status":item.request_status,
                 "Province": item.province,
                 "added_date":item.added_date,
                 "location":item.location,

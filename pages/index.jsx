@@ -71,6 +71,14 @@ let columns = [
   }
  },
  { 
+  name: 'request_status', 
+  lable: 'request_status',
+  options: {
+  filtter:true,
+  sort:true,
+  }
+ },
+ { 
   name: 'added_date', 
   lable: 'Added Date',
   options: {
