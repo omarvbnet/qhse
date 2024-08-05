@@ -27,6 +27,18 @@ import dayjs from 'dayjs';
 import e from 'cors';
 
 const options = [
+  {'type':'Fiber Site Opration',
+'isPressed':false
+},
+{'type':'FTTH Route Opration',
+'isPressed':false
+},
+{'type':'FDT Opration',
+'isPressed':false
+},
+{'type':'Metro Route Opration',
+'isPressed':false
+},
   {'type':'FDT Handover',
 'isPressed':false
 },
@@ -46,18 +58,7 @@ const options = [
 {'type':'Item Inspection',
 'isPressed':false
 },
-{'type':'Fiber Site Opration',
-'isPressed':false
-},
-{'type':'FTTH Route Opration',
-'isPressed':false
-},
-{'type':'FDT Opration',
-'isPressed':false
-},
-{'type':'Metro Route Opration',
-'isPressed':false
-},
+
 {'type':'Other',
 'isPressed':false
 }, 
