@@ -49,7 +49,13 @@ const options = [
 {'type':'Fiber Site Opration',
 'isPressed':false
 },
-{'type':'Fiber Route Opration',
+{'type':'FTTH Route Opration',
+'isPressed':false
+},
+{'type':'FDT Opration',
+'isPressed':false
+},
+{'type':'Metro Route Opration',
 'isPressed':false
 },
 {'type':'Other',
